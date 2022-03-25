@@ -38,4 +38,14 @@ public class InvoiceTest {
 		
 		Assert.assertEquals(5, invoice.generateInvoice(new Ride(0.1, 1)), 0.0);
 	}
+	
+	/**
+	 * Test case to test multiple rides.
+	 */
+	@Test
+	public void testGenerateInvoice_multipleRides() {
+		
+		Ride [] rides = {new Ride(0.1, 2), new Ride(10, 3)};
+		Assert.assertEquals(108, invoice.generateInvoice(rides), 0.0);
+	}
 }
