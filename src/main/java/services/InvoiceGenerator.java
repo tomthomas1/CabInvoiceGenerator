@@ -17,7 +17,7 @@ public class InvoiceGenerator {
 	 * @return -  return fare.
 	 */
 	public double generateInvoice(Ride ride) {
-		double fare = 10*ride.distance + ride.time;
+		double fare = (ride.distancePrice * ride.distance)+ (ride.timePrice * ride.time);
 		
 		return fare > 5 ? fare : 5;
 	}
@@ -32,11 +32,12 @@ public class InvoiceGenerator {
 		double singleFare;
 		double totalFare = 0;
 		for (Ride ride : rides) {
-			singleFare = 10*ride.distance + ride.time;
+			singleFare = generateInvoice(ride);
 			totalFare += singleFare > 5 ? singleFare : 5;
 		}
-		return new Invoice(rides.length, totalFare, totalFare / rides.length);
-
+		Invoice in = new Invoice(rides.length, totalFare, totalFare / rides.length);
+		System.out.println(in);
+		return in;
 	}
 	
 	/**
