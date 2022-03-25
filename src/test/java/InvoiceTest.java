@@ -1,7 +1,10 @@
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import entities.Invoice;
 import entities.Ride;
 import services.InvoiceGenerator;
 
@@ -14,6 +17,7 @@ import services.InvoiceGenerator;
  */
 public class InvoiceTest {
 	InvoiceGenerator invoice;
+	
 	@Before 
 	public void initialization() {
 		invoice = new InvoiceGenerator();
@@ -43,9 +47,21 @@ public class InvoiceTest {
 	 * Test case to test multiple rides.
 	 */
 	@Test
+	public void testInvoice_multipleRides() {
+		
+		Ride [] rides = {new Ride(0.1, 2), new Ride(10, 3)};
+		//Assert.assertEquals(108, invoice.generateInvoice(rides), 0.0);
+	}
+	
+	/**
+	 * Test case to check total ride, fare and average fare.
+	 */
+	@Test
 	public void testGenerateInvoice_multipleRides() {
 		
 		Ride [] rides = {new Ride(0.1, 2), new Ride(10, 3)};
-		Assert.assertEquals(108, invoice.generateInvoice(rides), 0.0);
+		Invoice invoices = new Invoice(2, 108, 54);
+		
+		assertEquals(invoices, invoice.generateInvoice(rides));
 	}
 }

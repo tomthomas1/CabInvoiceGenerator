@@ -1,5 +1,6 @@
 package services;
 
+import entities.Invoice;
 import entities.Ride;
 /**
  * Class for invoice manipulation.
@@ -22,15 +23,16 @@ public class InvoiceGenerator {
 	 *  Method to calculate fare for multiples rides
 	 *  We will calculate the fare and add it in the totalfare
 	 * @param rides -  we will pass the dis and time
-	 * @return total fare
+	 * @return - total ride, total fare and average fare
 	 */
-	public double generateInvoice(Ride[] rides) {
+	public Invoice generateInvoice(Ride[] rides) {
 		double singleFare;
 		double totalFare = 0;
 		for (Ride ride : rides) {
 			singleFare = 10*ride.distance + ride.time;
 			totalFare += singleFare > 5 ? singleFare : 5;
 		}
-		return totalFare;
+		return new Invoice(rides.length, totalFare, totalFare / rides.length);
+
 	}
 }
